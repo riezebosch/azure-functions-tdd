@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp", "FunctionApp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp.Tests", "FunctionApp.Tests\FunctionApp.Tests.csproj", "{F7E8F774-B8C6-48A0-9023-CA521F8D6924}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp.IntegrationTests", "FunctionApp.IntegrationTests\FunctionApp.IntegrationTests.csproj", "{D49B712C-675B-4878-BCD8-1D4AA82D1592}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{F7E8F774-B8C6-48A0-9023-CA521F8D6924}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7E8F774-B8C6-48A0-9023-CA521F8D6924}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7E8F774-B8C6-48A0-9023-CA521F8D6924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49B712C-675B-4878-BCD8-1D4AA82D1592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49B712C-675B-4878-BCD8-1D4AA82D1592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49B712C-675B-4878-BCD8-1D4AA82D1592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49B712C-675B-4878-BCD8-1D4AA82D1592}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
