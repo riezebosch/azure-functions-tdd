@@ -1,11 +1,8 @@
-using System.IO;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
-using FluentAssertions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using NSubstitute;
+using Octokit;
 using Xunit;
 
 namespace FunctionApp.Tests
@@ -21,25 +18,16 @@ namespace FunctionApp.Tests
             var request = Substitute.For<HttpRequest>();
             request.Body = await body.ReadAsStreamAsync();
 
+            var issues = Substitute.For<IIssuesClient>();
+            var github = Substitute.For<IGitHubClient>();
+            github.Issue.Returns(issues);
+            
             // Act
-            var sr =  new StreamReader(request.Body);
-            var data = JsonSerializer.Deserialize<PostData>(sr.ReadToEnd(), new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            var function = new Function(github);
+            function.Run(request);
 
             // Assert
-            data
-                .Should()
-                .BeEquivalentTo(
-                    new PostData
-                    {
-                        Title = "some title",
-                        Description = "some description"
-                    });
+            await issues.Received().Create(1234L, Arg.Is<NewIssue>(x => x.Title == "some title" && x.Body == "some description"));
         }
-    }
-
-    public class PostData
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
     }
 }
