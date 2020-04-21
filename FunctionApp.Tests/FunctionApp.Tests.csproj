@@ -20,11 +20,5 @@
       <ProjectReference Include="..\FunctionApp\FunctionApp.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Activities" />
-      <Folder Include="Orchestrations" />
-      <Folder Include="Starters" />
-    </ItemGroup>
-
     
 </Project>

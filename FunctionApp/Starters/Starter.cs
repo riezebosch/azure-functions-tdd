@@ -1,26 +1,24 @@
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
+using FunctionApp.Orchestrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Octokit;
 
-namespace FunctionApp
+namespace FunctionApp.Starters
 {
-    public class Function
+    public class Starter
     {
-        private readonly IGitHubClient _github;
-
-        public Function(IGitHubClient github) => _github = github;
-
-        [FunctionName(nameof(Function))]
-        public void Run([HttpTrigger]HttpRequest request)
+        [FunctionName(nameof(Starter))]
+        public async Task Run([HttpTrigger] HttpRequest request, [DurableClient]IDurableOrchestrationClient client)
         {
             var sr = new StreamReader(request.Body);
             var data = JsonSerializer.Deserialize<PostData>(sr.ReadToEnd(),
                 new JsonSerializerOptions {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
 
-            _github.Issue.Create(1234L, new NewIssue(data.Title) {Body = data.Description});
+            await client.StartNewAsync(nameof(Orchestration), data);
         }
     }
 }
